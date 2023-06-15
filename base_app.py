@@ -46,11 +46,11 @@ def main():
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "Information"]
+	options = ["Prediction", "EDA", "Model Explanation", "About Us"]
 	selection = st.sidebar.selectbox("Choose Option", options)
 
-	# Building out the "Information" page
-	if selection == "Information":
+	# Building out the "EDA" page
+	if selection == "EDA":
 		st.info("General Information")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Some information here")
@@ -77,6 +77,23 @@ def main():
 			# You can use a dictionary or similar structure to make this output
 			# more human interpretable.
 			st.success("Text Categorized as: {}".format(prediction))
+
+	if selection == "Model Explanation":
+		st.info("Insert explanations of the models we used")
+		# You can read a markdown file from supporting resources folder
+		st.markdown("Some information here")
+
+	if selection == "About Us":
+		st.info("About the team")
+		st.image("resources/imgs/Trendsetters_Analytics_Company_Logo.png", use_column_width = True)
+		# You can read a markdown file from supporting resources folder
+		st.markdown("**Edna Mosima Kobo**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
+		st.markdown("**Donald Nkabinde**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
+		st.markdown("**Mmabatho Mojapelo**: Time Management Specialist - Manages project timelines, deadlines, and task prioritization for efficient project progress.")
+		st.markdown("**Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
+		st.markdown("**Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
+		st.markdown("**Hawert Tshepo Hobyane**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
+		st.markdown("**Mack Thabo Ramalatso**: Data Scientist - Applies advanced analytics, develops and trains machine learning models, and extracts insights for predictions.")
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
