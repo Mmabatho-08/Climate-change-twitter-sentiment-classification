@@ -46,14 +46,44 @@ def main():
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "EDA", "Model Explanation", "About Us"]
+	options = ["About The App", "Prediction", "EDA", "Model Explanation", "About Us"]
 	selection = st.sidebar.selectbox("Choose Option", options)
+
+	# Building out the "EDA" page
+	if selection == "About The App":
+		st.info("About this app")
+		st.markdown(
+			"This app requires the user to input text, \
+			ideally a tweet relating to climate change, and will\
+			classify it according to whether or not they believe in\
+			climate change. Below you will find information about the data source\
+			and a brief data description. To make a prediction, navigate to **'Prediction'**\
+			in the dropdown menu on the left and insert the tweet you would like to classify. Furthermore,\
+			you can select a classification model of your choosing on this page. Explanations of the models used are given\
+			in the **'Model Explanation'** dropdown menu. A deep dive into the data used to train the models is\
+			given in the **'EDA'** menu."
+			)
+		st.info("Data description")
+		st.markdown("The collection of this data was funded by a Canada Foundation for Innovation JELF Grant to Chris Bauch, University of Waterloo.\
+			This dataset aggregates tweets pertaining to climate change collected between Apr 27, 2015 and Feb 21, 2018. In total, 43943 tweets were annotated. Each tweet is labelled independently by 3 reviewers.\
+			This dataset only contains tweets that all 3 reviewers agreed on (the rest were discarded).\
+			Each tweet is labelled as one of the following classes:")
+		st.markdown("- 2 (News): the tweet links to factual news about climate change")
+		st.markdown("- 1 (Pro): the tweet supports the belief of man-made climate change")
+		st.markdown("- 0 (Neutral): the tweet neither supports nor refutes the belief of man-made climate change")
+		st.markdown("- -1 (Anti): the tweet does not believe in man-made climate change")
 
 	# Building out the "EDA" page
 	if selection == "EDA":
 		st.info("General Information")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Some information here")
+		st.image("resources/imgs/figure_1.png", use_column_width = True)
+		st.image("resources/imgs/figure_2.png", use_column_width = True)
+		st.image("resources/imgs/figure_3.png", use_column_width = True)
+		st.image("resources/imgs/figure_4.png", use_column_width = True)
+		st.image("resources/imgs/figure_5.png", use_column_width = True)
+		st.image("resources/imgs/figure_6.png", use_column_width = True)
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
