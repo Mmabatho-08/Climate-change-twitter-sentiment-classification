@@ -282,15 +282,17 @@ def main():
 		with col3:
 			st.write(" ")
 		#-------------------------------------------------------------
-		st.markdown("The Trendsetters Analytics logo embodies our commitment to discovering, analysing, and leading trends. With a sleek and dynamic design, it represents our expertise in providing insightful analytics solutions. The logo features the name \"Trendsetters Analytics\" alongside our empowering slogan \"Discover, Analyze, Lead...\" This combination reflects our dedication to helping businesses stay ahead of the curve by unlocking trend insights. Below is a list of the team members making this possible:")
-		st.markdown("**[Edna Mosima Kobo](https://github.com/EdnaM06)**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
-		st.markdown("**[Donald Nkabinde](https://github.com/khulu2)**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
-		st.markdown("**[Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritisation for efficient project progress.")
-		st.markdown("**Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
-		st.markdown("**Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
-		st.markdown("**[Hawert Tshepo Hobyane](https://github.com/HawertHobyane)**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
-		st.markdown("**Mack Thabo Ramalatso**: Data Scientist - Applies advanced analytics, develops and trains machine learning models, and extracts insights for predictions.")
-
+		st.markdown("The Trendsetters Analytics logo embodies our commitment to discovering, analysing, and leading trends. With a sleek and dynamic design, it represents our expertise in providing insightful analytics solutions. The logo features the name \"Trendsetters Analytics\" alongside our empowering slogan \"Discover, Analyze, Lead...\" This combination reflects our dedication to helping businesses stay ahead of the curve by unlocking trend insights.")
+		st.markdown("Below is a list of the team members making this possible:")
+		st.markdown("---")
+		st.markdown("**👉 [Edna Mosima Kobo](https://github.com/EdnaM06)**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
+		st.markdown("**👉 [Donald Nkabinde](https://github.com/khulu2)**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
+		st.markdown("**👉 [Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritisation for efficient project progress.")
+		st.markdown("**👉 Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
+		st.markdown("**👉 Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
+		st.markdown("**👉 [Hawert Tshepo Hobyane](https://github.com/HawertHobyane)**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
+		st.markdown("**👉 Mack Thabo Ramalatso**: Data Scientist - Applies advanced analytics, develops and trains machine learning models, and extracts insights for predictions.")
+		st.markdown("---")
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
 	main()
