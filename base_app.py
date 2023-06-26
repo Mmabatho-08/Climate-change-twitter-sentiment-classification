@@ -90,9 +90,12 @@ def main():
 	# Building out the "EDA" page
 	if selection == "EDA":
 		st.info("🕵️‍♂️ This page explains information gathered from the data. To expand the image, hover over it and click the expand arrows that appear.")
-		# You can read a markdown file from supporting resources folder
-		st.markdown("Some information here")
-		### Hacky way to centre the images
+		
+		st.markdown("---")
+
+		st.markdown("The figures below were extracted during the exploritory data analysis (EDA) part of this project. Some additional information is provided alongside the figures.")
+		st.markdown("---")
+		
 		col1, col2 = st.columns(2)
 
 		with col1:
@@ -100,7 +103,11 @@ def main():
 
 		with col2:
 			st.image("resources/imgs/figure_2.png")
+		
+		st.markdown("The previous two plots indicate that our dataset is not balanced. There are more entries belonging to people who have the belief of man-made climate change. Over 50% of the data is comprised of such tweets.")
+		st.markdown("---")
 		#-------------------------------------------------------------
+		### Hacky way to centre the images
 		col1, col2, col3 = st.columns(3)
 
 		with col1:
@@ -111,6 +118,9 @@ def main():
 
 		with col3:
 			st.write(" ")
+
+		st.markdown("The length of the text is determined by the character limit of each tweet. The character limit used to be 140, however in [late 2017](https://www.forbes.com/sites/nicholasreimann/2023/02/08/twitter-boosts-character-limit-to-4000-for-twitter-blue-subscribers/?sh=689ca7825ab8), it was expanded to 280 characters. All sentiment classes have outliers, with the only exception being the `Neutral` class.")
+		st.markdown("---")
 		#-------------------------------------------------------------
 		col1, col2, col3 = st.columns(3)
 
@@ -122,6 +132,13 @@ def main():
 
 		with col3:
 			st.write(" ")
+
+		st.markdown("The following bullet points relate to the figure above:")
+		st.markdown("- `#climate` and `#climatechange` are expected to be the most popular as they are our key identifier in tweets.")
+		st.markdown("- `#BeforeTheFlood` surfaced after a [documentary](https://en.wikipedia.org/wiki/Before_the_Flood_(film)) about environmental degradation that leads to global warming and suggestions on how to reduce it, narrated by Leonardo DiCaprio. This hashtag is most popular in tweets belonging in the `Pro` and `Neutral` categories.")
+		st.markdown("- `#trump` is one of the top hashtags for the Anti class. This could possibly be due to Donald Trump calling climate change a [\"hoax\"](https://www.motherjones.com/environment/2016/12/trump-climate-timeline/) multiple times.")
+		st.markdown("- The `#cop22` represents the [United Nations Climate Change Conference](https://unfccc.int/event/cop-22) that took place in 2016.")
+		st.markdown("---")
 		#-------------------------------------------------------------
 		col1, col2, col3 = st.columns(3)
 
@@ -133,21 +150,24 @@ def main():
 
 		with col3:
 			st.write(" ")
-		#-------------------------------------------------------------
-		col1, col2, col3 = st.columns(3)
 
-		with col1:
-			st.write(" ")
+		st.markdown("Other than news outlets, politicians are the most engaged individuals in climate change discussions. This has shifted this issue from being a scientific issue into a political one.")
+		# #-------------------------------------------------------------
+		# col1, col2, col3 = st.columns(3)
 
-		with col2:
-			st.image("resources/imgs/figure_6.png")
+		# with col1:
+		# 	st.write(" ")
 
-		with col3:
-			st.write(" ")
-		#-------------------------------------------------------------
+		# with col2:
+		# 	st.image("resources/imgs/figure_6.png")
+
+		# with col3:
+		# 	st.write(" ")
+		# #-------------------------------------------------------------
 
 	# Building out the predication page
 	if selection == "Predict":
+		output = {-1: "Anti", 0: "Neutral", 1: "Pro", 2: "News"}
 		st.info("🗳️ Which model would you like to use?")
 		# Creating a text box for user input
 		model = st.radio(" ", 
@@ -166,7 +186,7 @@ def main():
 				# When model has successfully run, will print prediction
 				# You can use a dictionary or similar structure to make this output
 				# more human interpretable.
-				st.success("Text Categorized as: {}".format(prediction))
+				st.success("Text Categorized as: {}".format(output[prediction[0]]))
 
 		if model == "Logistic Regression":
 			tweet_text = st.text_area("Enter text (Replace text below)", "CHECK OUT THESE WEATHER STORIES https://t.co/LwVzcPO30e Do Not believe the Global warming climate change stories sold by UN, Vatican &amp; Obama")
@@ -181,7 +201,7 @@ def main():
 				# When model has successfully run, will print prediction
 				# You can use a dictionary or similar structure to make this output
 				# more human interpretable.
-				st.success("Text Categorized as: {}".format(prediction))
+				st.success("Text Categorized as: {}".format(output[prediction[0]]))
 
 		if model == "Stochastic Gradient Descent (SGD)":
 			tweet_text = st.text_area("Enter text (Replace text below)", "CHECK OUT THESE WEATHER STORIES https://t.co/LwVzcPO30e Do Not believe the Global warming climate change stories sold by UN, Vatican &amp; Obama")
@@ -196,13 +216,16 @@ def main():
 				# When model has successfully run, will print prediction
 				# You can use a dictionary or similar structure to make this output
 				# more human interpretable.
-				st.success("Text Categorized as: {}".format(prediction))
+				# st.success("Text Categorized as: {}".format(prediction[0]))
+				st.success("Text Categorized as: {}".format(output[prediction[0]]))
+
+		st.write("Note: Our models have ~75% accuracy. So not all classifications will be correct.")
 
 	if selection == "Models":
 		st.info("🤖 This section provides explanations of the three models we used. We also provide advantages and disadvantages of the models.")
 		st.markdown("The figure below shows the performances of the 11 models we trained. For this app, only the three best models were chosen. The three models are explained below.")
 		st.image("resources/imgs/figure_7.png")
-		st.markdown("## 1️ LinearSVC (Support Vector Classifier):")
+		st.markdown("## 1️ LinearSVC (Support Vector Classifier)")
 		st.markdown("LinearSVC is a linear classification model based on Support Vector Machines (SVM). It aims to find a hyperplane that separates the data into different classes with the maximum margin.")
 		st.markdown("#### ✅ Advantages:")
 		st.markdown("- Effective in high-dimensional spaces: LinearSVC performs well in datasets with a large number of features or dimensions.")
@@ -215,7 +238,7 @@ def main():
 
 		st.markdown("---")
 
-		st.markdown("## 2️ Logistic Regression:")
+		st.markdown("## 2️ Logistic Regression")
 		st.markdown("Logistic Regression is a statistical model used for binary classification. It estimates the probability of an instance belonging to a particular class based on its features.")
 		st.markdown("#### ✅ Advantages:")
 		st.markdown("- Simple and interpretable: Logistic regression is a straightforward model that provides interpretable coefficients, allowing us to understand the impact of each feature on the predicted probability.")
@@ -228,7 +251,7 @@ def main():
 
 		st.markdown("---")
 
-		st.markdown("## 3️ Stochastic Gradient Descent (SGD):")
+		st.markdown("## 3️ Stochastic Gradient Descent (SGD)")
 		st.markdown("Stochastic Gradient Descent (SGD) is an optimisation algorithm commonly used for training linear classifiers and regressors. It updates the model parameters based on the gradients computed on small random subsets of the training data. SGD can be used with different loss functions, making it versatile for different types of models. ")
 		st.markdown("#### ✅ Advantages:")
 		st.markdown("- Efficiency with large datasets: SGD is computationally efficient and can handle large datasets, as it updates the model parameters on small subsets of the data.")
@@ -239,13 +262,30 @@ def main():
 		st.markdown("- Sensitive to feature scaling: Like other linear models, SGD benefits from feature scaling to ensure fair treatment of different features.")
 		st.markdown("- May converge to suboptimal solutions: SGD can converge to suboptimal solutions if the learning rate is too high or the training data is noisy. It requires careful parameter selection and appropriate data preprocessing.")
 
+		st.markdown("---")
+
+		st.markdown("## 🔚 Conclusion")
+		st.markdown("Our best models are linear classifiers. Text classification problems are typically high dimensionality, and high dimensionality problems are likely to be linearly separable. Thus, linear classifiers perform well because they help to avoid over-fitting by separating the patterns of each class by large margins.")
+
+
 	if selection == "About Us":
 		st.info("😎 About the team")
-		st.image("resources/imgs/Trendsetters_Analytics_Company_Logo.png", use_column_width = True)
-		# You can read a markdown file from supporting resources folder
+		#-------------------------------------------------------------
+		col1, col2, col3 = st.columns(3)
+
+		with col1:
+			st.write(" ")
+
+		with col2:
+			st.image("resources/imgs/Trendsetters_Analytics_Company_Logo.png")
+
+		with col3:
+			st.write(" ")
+		#-------------------------------------------------------------
+		st.markdown("The Trendsetters Analytics logo embodies our commitment to discovering, analysing, and leading trends. With a sleek and dynamic design, it represents our expertise in providing insightful analytics solutions. The logo features the name \"Trendsetters Analytics\" alongside our empowering slogan \"Discover, Analyze, Lead...\" This combination reflects our dedication to helping businesses stay ahead of the curve by unlocking trend insights. Below is a list of the team members making this possible:")
 		st.markdown("**[Edna Mosima Kobo](https://github.com/EdnaM06)**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
 		st.markdown("**[Donald Nkabinde](https://github.com/khulu2)**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
-		st.markdown("**[Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritization for efficient project progress.")
+		st.markdown("**[Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritisation for efficient project progress.")
 		st.markdown("**Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
 		st.markdown("**Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
 		st.markdown("**[Hawert Tshepo Hobyane](https://github.com/HawertHobyane)**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
