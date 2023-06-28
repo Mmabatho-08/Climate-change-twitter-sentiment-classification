@@ -29,6 +29,8 @@ from streamlit_option_menu import option_menu # need to pip install streamlit-op
 
 # Data dependencies
 import pandas as pd
+import datetime
+import numpy as np
 
 # Vectorizer
 news_vectorizer = open("resources/vect.pkl","rb")
@@ -44,17 +46,17 @@ def main():
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
 	st.set_page_config(layout="wide")
-	st.title("Tweet Classifer")
-	st.subheader("Climate change tweet classification")
+	st.title("TrendInsights™")
+	# st.subheader("Climate change tweet classification")
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
 	# with st.sidebar:
 	selection = option_menu(
 		menu_title = None,
-		options = ["Info", "Predict", "EDA", "Models", "About Us"],
-		icons = ["info-square", "twitter", "bar-chart-line", "book", "envelope"],
-		default_index = 0,
+		options = ["Info", "Predict", "EDA", "Models", "About Us", "Contact"],
+		icons = ["info-square", "twitter", "bar-chart-line", "book", "people-fill", "envelope"],
+		default_index = 1,
 		menu_icon = "house",
 		orientation = "horizontal",
 		styles = {
@@ -219,8 +221,6 @@ def main():
 				# st.success("Text Categorized as: {}".format(prediction[0]))
 				st.success("Text Categorized as: {}".format(output[prediction[0]]))
 
-		st.write("Note: Our models have ~75% accuracy. So not all classifications will be correct.")
-
 	if selection == "Models":
 		st.info("🤖 This section provides explanations of the three models we used. We also provide advantages and disadvantages of the models.")
 		st.markdown("The figure below shows the performances of the 11 models we trained. For this app, only the three best models were chosen. The three models are explained below.")
@@ -277,7 +277,7 @@ def main():
 			st.write(" ")
 
 		with col2:
-			st.image("resources/imgs/Trendsetters_Analytics_Company_Logo.png")
+			st.image("resources/imgs/new_Trendsetters_Analytics_Company_Logo.png")
 
 		with col3:
 			st.write(" ")
@@ -285,14 +285,115 @@ def main():
 		st.markdown("The Trendsetters Analytics logo embodies our commitment to discovering, analysing, and leading trends. With a sleek and dynamic design, it represents our expertise in providing insightful analytics solutions. The logo features the name \"Trendsetters Analytics\" alongside our empowering slogan \"Discover, Analyze, Lead...\" This combination reflects our dedication to helping businesses stay ahead of the curve by unlocking trend insights.")
 		st.markdown("Below is a list of the team members making this possible:")
 		st.markdown("---")
-		st.markdown("**👉 [Edna Mosima Kobo](https://github.com/EdnaM06)**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
-		st.markdown("**👉 [Donald Nkabinde](https://github.com/khulu2)**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
-		st.markdown("**👉 [Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritisation for efficient project progress.")
-		st.markdown("**👉 Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
-		st.markdown("**👉 Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
-		st.markdown("**👉 [Hawert Tshepo Hobyane](https://github.com/HawertHobyane)**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
-		st.markdown("**👉 Mack Thabo Ramalatso**: Data Scientist - Applies advanced analytics, develops and trains machine learning models, and extracts insights for predictions.")
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/edna.png", caption="Edna Mosima Kobo", width=200)
+
+		with col2:
+			st.write("Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
 		st.markdown("---")
+
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/donald.png", caption="Donald Nkabinde", width=200)
+
+		with col2:
+			st.write("Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
+		st.markdown("---")
+
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/mmabatho.png", caption="Mmabatho Mojapelo", width=200)
+
+		with col2:
+			st.write("Time Management Specialist - Manages project timelines, deadlines, and task prioritization for efficient project progress.")
+		st.markdown("---")
+
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/liz.png", caption="Makosha Elizabeth Lekganyane", width=200)
+
+		with col2:
+			st.write("Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
+		st.markdown("---")
+
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/khutso.png", caption="Khutso Madiga", width=200)
+
+		with col2:
+			st.write("Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
+		st.markdown("---")
+
+		col1, col2 = st.columns([1, 3])
+
+		with col1:
+			st.image("resources/imgs/tshepo.png", caption="Hawert Tshepo Hobyane", width=200)
+
+		with col2:
+			st.write("Feature Engineer - Identifies and designs relevant features to enhance model performance.")
+		st.markdown("---")
+
+		# st.markdown("**👉 [Edna Mosima Kobo](https://github.com/EdnaM06)**: Team leader and Project Manager - Oversees the project, coordinates team members, and ensures project goals are achieved.")
+		# st.markdown("**👉 [Donald Nkabinde](https://github.com/khulu2)**: Vice team leader and Data Analyst - Assists the team leader, contributes to data analysis, and provides insights and recommendations.")
+		# st.markdown("**👉 [Mmabatho Mojapelo](https://github.com/Mmabatho-08)**: Time Management Specialist - Manages project timelines, deadlines, and task prioritisation for efficient project progress.")
+		# st.markdown("**👉 Makosha Elizabeth Lekganyane**: Quality Control Analyst - Ensures accuracy, reliability, and quality of data, models, and outcomes.")
+		# st.markdown("**👉 Khutso Madiga**: Data Engineer - Responsible for data acquisition, preprocessing, integration, and storage for high-quality data analysis.")
+		# st.markdown("**👉 [Hawert Tshepo Hobyane](https://github.com/HawertHobyane)**: Feature Engineer - Identifies and designs relevant features to enhance model performance.")
+		# st.markdown("---")
+	if selection == "Contact":
+		st.info("📞 Hi there, feel free to ask us anything. We will get back to you as soon as possible.")
+
+		csv_file = 'users.csv'
+		if os.path.exists(csv_file):
+			# read from file
+			results_option1 = pd.read_csv(csv_file, index_col=False)
+		else:
+			# create empty dataframe with the right columns & dtypes
+			results_option1 = pd.DataFrame(
+				{'time': np.array([]).astype('datetime64[ns]'),
+				'name': [],
+				'lastname': [],
+				'email': [],
+				"phone": [],
+				"method": [],
+				"message": [],
+				}
+			)
+		with st.form(key = 'user_info'):
+			col1, col2 = st.columns(2)
+
+			with col1:
+				name = st.text_input(label="First Name 📛")
+
+			with col2:
+				lastname = st.text_input(label="Last Name 📛")
+
+			email = st.text_input(label="Email Address 📧")
+			phone = st.text_input(label="Phone Number 📱")
+
+			preferrence = st.radio("Preferred method of communication 🗣", ("Call", "Email", "Both"))
+
+			message = st.text_input(label="Enquiry message 📨")
+
+			submit_form = st.form_submit_button(label="Send Message")
+
+			# Checking if all the fields are non empty
+			if submit_form:		
+				if name and lastname and email and phone and preferrence and message:
+					timestamp = datetime.datetime.now()
+					results_option1.loc[len(results_option1)] = [timestamp, name, lastname, email, phone, preferrence, message]
+					results_option1.to_csv(csv_file, index=False)
+					# st.dataframe(results_option1)
+					st.success("😁 Expect communication from us soon!")
+				else:
+					st.warning("Please fill all the fields")
+
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
 	main()
